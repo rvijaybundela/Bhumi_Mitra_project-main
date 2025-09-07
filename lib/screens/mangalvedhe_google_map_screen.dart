@@ -113,8 +113,8 @@ class _MangalvedheGoogleMapScreenState extends State<MangalvedheGoogleMapScreen>
             gmaps.Polygon(
               polygonId: gmaps.PolygonId('mangalvedhe_$i'),
               points: polygonPoints,
-              fillColor: _getPolygonColor(i).withOpacity(0.4),
-              strokeColor: _getPolygonColor(i),
+              fillColor: _getPolygonColor(surveyNumber).withOpacity(0.5),
+              strokeColor: _getPolygonColor(surveyNumber),
               strokeWidth: 2,
               consumeTapEvents: true,
               onTap: () => _showSurveyDetails(surveyNumber, polygonPoints),
@@ -139,8 +139,11 @@ class _MangalvedheGoogleMapScreenState extends State<MangalvedheGoogleMapScreen>
     }
   }
 
-  Color _getPolygonColor(int index) {
-    // Alternate colors for better visibility
+  Color _getPolygonColor(String surveyNumber) {
+    // Create a hash from survey number for consistent coloring
+    int hash = surveyNumber.hashCode.abs();
+    
+    // Extended color palette for better variety
     List<Color> colors = [
       Colors.blue,
       Colors.green, 
@@ -148,8 +151,20 @@ class _MangalvedheGoogleMapScreenState extends State<MangalvedheGoogleMapScreen>
       Colors.purple,
       Colors.orange,
       Colors.teal,
+      Colors.pink,
+      Colors.indigo,
+      Colors.amber,
+      Colors.cyan,
+      Colors.lime,
+      Colors.deepOrange,
+      Colors.deepPurple,
+      Colors.lightBlue,
+      Colors.lightGreen,
+      Colors.brown,
+      Colors.grey,
+      Colors.blueGrey,
     ];
-    return colors[index % colors.length];
+    return colors[hash % colors.length];
   }
 
   void _showSurveyDetails(String surveyNumber, List<gmaps.LatLng> points) {
